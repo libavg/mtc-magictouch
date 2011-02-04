@@ -46,15 +46,15 @@ class SimpleEvent(object):
 
         self.__node.setEventHandler(
                 avg.CURSORDOWN,
-                avg.MOUSE,
+                avg.MOUSE | avg.TOUCH,
                 self.__down)
         self.__node.setEventHandler(
                 avg.CURSORMOTION,
-                avg.MOUSE,
+                avg.MOUSE | avg.TOUCH,
                 self.__motion)
         self.__node.setEventHandler(
                 avg.CURSORUP,
-                avg.MOUSE,
+                avg.MOUSE | avg.TOUCH,
                 self.__up)
 
     def __down(self, event):

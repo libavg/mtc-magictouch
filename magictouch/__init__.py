@@ -35,7 +35,6 @@ __all__ = ['apps', 'MagicTouch']
 #avg.Player.get().setMultiSampleSamples(4) # better quality
 
 class MagicTouch(GameApp):
-    multitouch = True
     def init(self):
         self._parentNode.mediadir = AVGAppUtil.getMediaDir(__file__)
         screenSize = avg.Player.get().getRootNode().size
