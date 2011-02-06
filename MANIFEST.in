@@ -1,0 +1,2 @@
+recursive-include magictouch/media *
+recursive-include magictouch/fonts *

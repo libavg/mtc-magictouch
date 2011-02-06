@@ -1,0 +1,26 @@
+This package was debianized by OXullo Intersecans <x@brainrapers.org> PKGDATE
+
+It was downloaded from: https://www.libavg.de/svn/trunk/avg_media/mtc/magictouch/
+
+Upstream Author(s): Benedikt Seidl <Benedikt.Seidl@gmx.de>
+
+Copyright:
+        Copyright (C) 2011 by Benedikt Seidl <Benedikt.Seidl@gmx.de>
+
+License:
+        This is free software: you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as published
+        by the Free Software Foundation, either version 3 of the License, or
+        (at your option) any later version.
+
+        This is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU General Public License for more details.
+
+        You should have received a copy of the GNU General Public License
+        along with this file. If not, see <http://www.gnu.org/licenses/>
+
+Packaging:
+        Copyright (C) 2011 by OXullo Intersecans <x@brainrapers.org>
+        released under BSD license

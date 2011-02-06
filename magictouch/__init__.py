@@ -80,7 +80,6 @@ class MagicTouch(GameApp):
         self.__top = top
 
     def _enter(self):
-        print "endetetetet"
         self.__pg.reset(pos=True)
         self.__menu.reset()
 

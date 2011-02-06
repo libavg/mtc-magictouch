@@ -81,10 +81,10 @@ class Menu(avg.DivNode):
                 pos = (w+20,150))
         
         d = dict(parent=content, **d)
-        avg.WordsNode(text="""MagicTouch""", pos=(w,10), **d)
+        avg.WordsNode(text="""magictouch""", pos=(w,10), **d)
         avg.WordsNode(text="""© 2011 Benedikt Seidl<br/>
                 Made with Python and libavg<br/>
-                Magic Touch is licensed under GNU GPL""", pos=(w,49), **d)
+                magictouch is licensed under GNU GPL""", pos=(w,49), **d)
 
         self.__aa = avg.RectNode(parent=self,
                 size=(40,40),
@@ -115,8 +115,8 @@ class Menu(avg.DivNode):
     
     def __up(self, event):
         self.__background.highlight(False)
-        enoughMoved = abs(event.pos.y - event.lastdownpos.y) > 50
-        if [self.__wasOutWhenPressed, enoughMoved] in ([True]*2, [False]*2):
+        enoughMoved = abs(event.pos.y - event.lastdownpos.y) > 30
+        if self.__wasOutWhenPressed == enoughMoved:
             pos = self.__inPos
         else:
             pos = self.__outPos
