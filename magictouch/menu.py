@@ -56,6 +56,11 @@ class Menu(avg.DivNode):
         super(Menu, self).__init__(**kw)
         w = 200
         h = 200
+        self.__shield = avg.RectNode(
+                parent=self.getParent(),
+                pos=P(centerBottom) - P(w,0),
+                opacity=0,
+                size=(w*2, h))
         self.__background = MenuBackground(parent=self, w=w, h=h)
         
         self.__inPos = P(centerBottom) + P(0,h+20)
