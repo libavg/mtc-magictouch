@@ -54,7 +54,7 @@ class MagicTouch(GameApp):
         self.__pg = PlayGround(parent=root,
                 start=self.__point)
         self.__menu = Menu(parent=root,
-                quitCb = self.leave,
+                quitCb = self.quit,
                 resetCb = self.__pg.reset,
                 centerBottom=(screenSize.x * 0.5,screenSize.y-bottom-17))
         m = Mask(parent=root,

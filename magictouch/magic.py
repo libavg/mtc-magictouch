@@ -95,7 +95,7 @@ class Knob(avg.DivNode):
         self.wheels[0].opacity=1
         self.wheelActive = 0
         activeArea = avg.CircleNode(
-                parent=self, r=50, opacity=0)
+                parent=self, r=70, opacity=0)
         self.__aa = activeArea
 
         SimpleEvent(self.__aa, self.__down, self.__motion, lambda x:None)
