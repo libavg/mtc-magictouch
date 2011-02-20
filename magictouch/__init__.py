@@ -95,6 +95,9 @@ class MagicTouch(GameApp):
         else:
             return False
 
+    def _getPackagePath(self):
+        return __file__
+
 #--------------------------------------------------------------------------#
 
 def createPreviewNode(maxSize):
