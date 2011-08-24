@@ -21,7 +21,7 @@
 
 
 import os
-from libavg import avg, AVGAppUtil, Point2D
+from libavg import avg, utils, Point2D
 from libavg.gameapp import GameApp
 P = Point2D
 
@@ -36,7 +36,7 @@ __all__ = ['apps', 'MagicTouch']
 
 class MagicTouch(GameApp):
     def init(self):
-        self._parentNode.mediadir = AVGAppUtil.getMediaDir(__file__)
+        self._parentNode.mediadir = utils.getMediaDir(__file__)
         screenSize = avg.Player.get().getRootNode().size
         self.__screenSize = screenSize
         root = self._parentNode
@@ -101,8 +101,8 @@ class MagicTouch(GameApp):
 #--------------------------------------------------------------------------#
 
 def createPreviewNode(maxSize):
-    filename = os.path.join(AVGAppUtil.getMediaDir(__file__), 'preview.png')
-    return AVGAppUtil.createImagePreviewNode(maxSize, absHref = filename)
+    filename = os.path.join(utils.getMediaDir(__file__), 'preview.png')
+    return utils.createImagePreviewNode(maxSize, absHref = filename)
 
 apps = ({'class': MagicTouch, 'createPreviewNode': createPreviewNode},)
 
