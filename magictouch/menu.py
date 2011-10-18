@@ -120,7 +120,7 @@ class Menu(avg.DivNode):
     
     def __up(self, event):
         self.__background.highlight(False)
-        enoughMoved = abs(event.pos.y - event.lastdownpos.y) > 30
+        enoughMoved = abs(event.contact.motionvec.y) > 30
         if self.__wasOutWhenPressed == enoughMoved:
             pos = self.__inPos
         else:
