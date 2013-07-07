@@ -21,7 +21,7 @@
 
 
 import os
-from libavg import avg, utils, Point2D
+from libavg import avg, utils, Point2D, player
 from libavg.gameapp import GameApp
 P = Point2D
 
@@ -32,12 +32,10 @@ from menu import Menu
 __all__ = ['apps', 'MagicTouch']
 
 
-#avg.Player.get().setMultiSampleSamples(4) # better quality
-
 class MagicTouch(GameApp):
     def init(self):
         self._parentNode.mediadir = utils.getMediaDir(__file__)
-        screenSize = avg.Player.get().getRootNode().size
+        screenSize = player.getRootNode().size
         self.__screenSize = screenSize
         root = self._parentNode
         left = right = top = 60

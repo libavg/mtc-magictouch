@@ -25,8 +25,9 @@ from math import pi, atan2
 from helper import SimpleEvent
 
 class Border(avg.DivNode):
-    def __init__(self, **kw):
+    def __init__(self, parent=None, **kw):
         super(Border, self).__init__(**kw)
+        self.registerInstance(self, parent)
 
         #4 edges
         default = dict(parent=self, href="edge.png", pivot=(0,0))
@@ -53,8 +54,10 @@ class Border(avg.DivNode):
 
 
 class Mask(avg.DivNode):
-    def __init__(self, screenSize, left, right, top, bottom, **kw):
+    def __init__(self, screenSize, left, right, top, bottom, parent=None, **kw):
         super(Mask, self).__init__(**kw)
+        self.registerInstance(self, parent)
+
         self.size = screenSize
         self.sensitive = False
         p = P(left, top)
@@ -77,8 +80,10 @@ class Mask(avg.DivNode):
 
 
 class Knob(avg.DivNode):
-    def __init__(self, callback, **kw):
+    def __init__(self, callback, parent=None, **kw):
         super(Knob, self).__init__(**kw)
+        self.registerInstance(self, parent)
+
         self.__callback = callback
         img = avg.ImageNode(parent=self, href="knob.png")
         img.pos = map(int,img.size*-0.5)
@@ -131,8 +136,10 @@ class Knob(avg.DivNode):
 
 
 class PlayGround(avg.DivNode):
-    def __init__(self, start, **kw):
+    def __init__(self, start, parent=None, **kw):
         super(PlayGround, self).__init__(**kw)
+        self.registerInstance(self, parent)
+
         self.__default = dict(parent=self, color='666666',strokewidth=2)
         self.__lastPos = start
         self.__start = start

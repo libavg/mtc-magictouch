@@ -19,14 +19,16 @@
 # You should have received a copy of the GNU General Public License
 # along with this file. If not, see <http://www.gnu.org/licenses/>.
 
-from libavg import avg
+from libavg import avg, player
 from helper import getArc, SimpleEvent
 
 P = avg.Point2D
 
 class MenuButton(avg.DivNode):
-    def __init__(self, text, cb, **kw):
+    def __init__(self, text, cb, parent=None, **kw):
         super(MenuButton, self).__init__(**kw)
+        self.registerInstance(self, parent)
+        
         points = []
         points += getArc(0,0, "lt")
         points += getArc(100,0, "rt")
@@ -52,8 +54,10 @@ class MenuButton(avg.DivNode):
 
 
 class Menu(avg.DivNode):
-    def __init__(self, centerBottom, quitCb, resetCb, **kw):
+    def __init__(self, centerBottom, quitCb, resetCb, parent=None, **kw):
         super(Menu, self).__init__(**kw)
+        self.registerInstance(self, parent)
+        
         w = 200
         h = 200
         self.__shield = avg.RectNode(
@@ -100,9 +104,7 @@ class Menu(avg.DivNode):
     
     def reset(self):
         self.pos = self.__outPos
-        avg.Player.get().setTimeout(
-                800,
-                lambda: self.__animateTo(self.__inPos))
+        player.setTimeout(800, lambda: self.__animateTo(self.__inPos))
 
     def __down(self, event):
         self.__background.highlight(True)
@@ -137,8 +139,10 @@ class Menu(avg.DivNode):
 
 
 class MenuBackground(avg.DivNode):
-    def __init__(self, w, h, **kw):
+    def __init__(self, w, h, parent=None, **kw):
         super(MenuBackground, self).__init__(**kw)
+        self.registerInstance(self, parent)
+        
         self.__outline = avg.PolygonNode(
                 parent=self,
                 opacity=0.3,
@@ -147,7 +151,7 @@ class MenuBackground(avg.DivNode):
         self.__arrow = avg.PolygonNode(parent=self,
                 fillopacity=0.8,
                 opacity=0)
-        avg.Player.get().setTimeout(500,lambda :self.highlight(False))
+        player.setTimeout(500,lambda :self.highlight(False))
         ps = []
         ps += getArc(-w,0, "lb")
         ps += getArc(-w,-h, "lt")

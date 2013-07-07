@@ -74,8 +74,10 @@ class SimpleEvent(object):
             self.__upCb(event)
 
 class Noise(avg.ImageNode):
-    def __init__(self, **kw):
+    def __init__(self, parent=None, **kw):
         super(Noise, self).__init__(**kw)
+        self.registerInstance(self, parent)
+
         self.sensitive=False
         self.opacity=0.05
         self.blendmode='blend'
