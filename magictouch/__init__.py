@@ -72,6 +72,8 @@ class MagicTouch(app.MainDiv):
         self.__bottom = bottom
         self.__top = top
 
+        self.__setupMultitouch()
+
     def __move(self, diff):
         point = self.__point + diff*10
         m = 17 # transparent part of the graphic
@@ -87,3 +89,21 @@ class MagicTouch(app.MainDiv):
     def _getPackagePath(self):
         return __file__
 
+    def __setupMultitouch(self):
+        if app.instance.settings.getBoolean('multitouch_enabled'):
+            return
+
+        import platform
+
+        if platform.system() == 'Linux':
+            os.putenv('AVG_MULTITOUCH_DRIVER', 'XINPUT')
+        elif platform.system() == 'Windows':
+            os.putenv('AVG_MULTITOUCH_DRIVER', 'WIN7TOUCH')
+        else:
+            os.putenv('AVG_MULTITOUCH_DRIVER', 'TUIO')
+
+        try:
+            player.enableMultitouch()
+        except Exception, e:
+            os.putenv('AVG_MULTITOUCH_DRIVER', 'TUIO')
+            player.enableMultitouch()
