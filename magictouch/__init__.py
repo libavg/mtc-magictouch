@@ -28,7 +28,6 @@ from magic import PlayGround, Mask, Knob
 from helper import Noise
 from menu import Menu
 
-__all__ = ['apps', 'MagicTouch']
 
 
 class MagicTouch(app.MainDiv):
@@ -73,10 +72,6 @@ class MagicTouch(app.MainDiv):
         self.__bottom = bottom
         self.__top = top
 
-    def _enter(self):
-        self.__pg.reset(pos=True)
-        self.__menu.reset()
-
     def __move(self, diff):
         point = self.__point + diff*10
         m = 17 # transparent part of the graphic
@@ -92,13 +87,3 @@ class MagicTouch(app.MainDiv):
     def _getPackagePath(self):
         return __file__
 
-#--------------------------------------------------------------------------#
-
-def createPreviewNode(maxSize):
-    filename = os.path.join(utils.getMediaDir(__file__), 'preview.png')
-    return utils.createImagePreviewNode(maxSize, absHref = filename)
-
-apps = ({'class': MagicTouch, 'createPreviewNode': createPreviewNode},)
-
-if __name__ == '__main__':
-   app.App().run(MagicTouch())
