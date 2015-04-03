@@ -20,6 +20,7 @@
 # along with this file. If not, see <http://www.gnu.org/licenses/>.
 
 import sys
+import libavg
 
 try:
     import magictouch
@@ -33,5 +34,5 @@ except ImportError:
         sys.exit(1)
 
 if __name__ == '__main__':
-    magictouch.MagicTouch.start()
+    libavg.app.App().run(magictouch.MagicTouch(), app_resolution='', app_fullscreen='true')
 

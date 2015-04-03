@@ -21,8 +21,7 @@
 
 
 import os
-from libavg import avg, utils, Point2D, player
-from libavg.gameapp import GameApp
+from libavg import avg, utils, Point2D, player, app
 P = Point2D
 
 from magic import PlayGround, Mask, Knob
@@ -32,45 +31,42 @@ from menu import Menu
 __all__ = ['apps', 'MagicTouch']
 
 
-class MagicTouch(GameApp):
-    def init(self):
-        self._parentNode.mediadir = utils.getMediaDir(__file__)
-        screenSize = player.getRootNode().size
-        self.__screenSize = screenSize
-        root = self._parentNode
+class MagicTouch(app.MainDiv):
+    def onInit(self):
+        self.mediadir = utils.getMediaDir(__file__)
         left = right = top = 60
         bottom = 160
         self.__point = P(left, top) \
-                + ((screenSize - (right+left, bottom+top)) * 0.5)
+                + ((self.size - (right+left, bottom+top)) * 0.5)
 
         avg.RectNode(
-                parent=root,
-                size=screenSize,
+                parent=self,
+                size=self.size,
                 opacity=0,
                 fillopacity=1,
                 fillcolor='cccccc')
-        self.__pg = PlayGround(parent=root,
+        self.__pg = PlayGround(parent=self,
                 start=self.__point)
-        self.__menu = Menu(parent=root,
-                quitCb = self.quit,
+        self.__menu = Menu(parent=self,
+                quitCb = player.stop,
                 resetCb = self.__pg.reset,
-                centerBottom=(screenSize.x * 0.5,screenSize.y-bottom-17))
-        m = Mask(parent=root,
+                centerBottom=(self.size.x * 0.5,self.size.y-bottom-17))
+        m = Mask(parent=self,
                 left=left,right=right,
                 top=top,bottom=bottom,
-                screenSize=screenSize)
-        l = Knob(parent=root,
+                screenSize=self.size)
+        l = Knob(parent=self,
                 callback=lambda x: self.__move(P(0,x)),
-                pos=(0.5*bottom,screenSize.y-bottom*0.5))
-        l = Knob(parent=root,
+                pos=(0.5*bottom,self.size.y-bottom*0.5))
+        l = Knob(parent=self,
                 callback=lambda x: self.__move(P(x,0)),
-                pos=(screenSize.x-bottom*0.5,screenSize.y-bottom*0.5))
+                pos=(self.size.x-bottom*0.5,self.size.y-bottom*0.5))
         
-        img = avg.ImageNode(parent=root,
+        img = avg.ImageNode(parent=self,
                 href="magic-libavg-touch.png",
-                pos=(screenSize.x/2, screenSize.y-bottom*0.5))
+                pos=(self.size.x/2, self.size.y-bottom*0.5))
         img.pos = img.pos - img.size * 0.5
-        Noise(parent=root, size=screenSize)
+        Noise(parent=self, size=self.size)
         
         self.__left = left
         self.__right = right
@@ -84,7 +80,7 @@ class MagicTouch(GameApp):
     def __move(self, diff):
         point = self.__point + diff*10
         m = 17 # transparent part of the graphic
-        sz = self.__screenSize
+        sz = self.size
         if self.__left + m + 1 < point.x < sz.x-self.__right -m and\
            self.__top + m + 1 < point.y < sz.y-self.__bottom - m:
             self.__point = point
@@ -105,4 +101,4 @@ def createPreviewNode(maxSize):
 apps = ({'class': MagicTouch, 'createPreviewNode': createPreviewNode},)
 
 if __name__ == '__main__':
-   MagicTouch.start()
+   app.App().run(MagicTouch())
